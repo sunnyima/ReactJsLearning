@@ -1,16 +1,9 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import {classDeveloper} from './Developer';
 
-const I = new classDeveloper('Marina', 'Khokkonen');
+import Users from './app/component/Users';
 
-class App extends React.Component{
-    render() {
-        return <div>
-            <h1>My First React App</h1>
-            <p>Developer: {I.name} {I.surname}</p>
-        </div>
-    }
-}
+const  USERS =['Anna', 'Victor', 'Olga','Anton'];
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+
+ReactDOM.render(<Users items={USERS}/>, document.getElementById('root'));
