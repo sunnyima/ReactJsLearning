@@ -34,13 +34,10 @@ const  POSTS =[{
 class App extends Component{
     constructor(props){
         super(props);
-        this.state={
-            newPost : false
-        }
     }
     render() {
         return <div>
-            <Blog items={POSTS} newPost={this.state.newPost}/>
+            <Blog items={POSTS}/>
         </div>
     }
 }

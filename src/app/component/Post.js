@@ -5,8 +5,7 @@ export default class Post extends Component{
         super(props);
         this.state = {
             post: this.props.item?this.props.item:{},
-            posts:this.props.items?this.props.items:[],
-            newPost : this.props.newPost
+            posts:this.props.items?this.props.items:[]
         };
         this.addPost = this.addPost.bind(this);
         this.titleRef = React.createRef();
@@ -45,20 +44,23 @@ export default class Post extends Component{
         this.setState({
             posts
         });
-        this.setState({newPost:true})
+        //this.setState({newPost:true})
     }
 
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        console.log('update post');
-        console.log(this.state.newPost);
-        if(nextProps.newPost === true)
-        {
-            this.setState({newPost : nextProps.newPost});
-        }
-        console.log(this.state.newPost);
-        return this.state.newPost;
-    }
 
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
 
     render() {
         return(

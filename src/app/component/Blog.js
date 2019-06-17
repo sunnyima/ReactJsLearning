@@ -1,33 +1,23 @@
 import React, {Component} from 'react';
 
 import Post from './Post';
-import LifeCycleUnmount from "./lifeCycleUnmount";
-import LifeCycleUpdate from "./lifeCycleUpdate";
 
 export default class Blog extends Component{
     constructor(props){
         super(props);
         this.state = {
-            posts: this.props.items,
-            newPost : this.props.newPost
+            posts: this.props.items
         };
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
         console.log('update');
-        console.log(this.state.newPost);
-        if(nextProps.newPost === true)
-        {
-            this.setState({newPost : nextProps.newPost});
-        }
-        console.log(this.state.newPost);
-        return this.state.newPost;
+        return true;
     }
 
 
 
     render() {
-        this.setState({newPost : false});
         const posts = this.state.posts.map((post, index) =>{
             return <Post item={post} key={index} type='post'/>
         });
@@ -35,9 +25,9 @@ export default class Blog extends Component{
         return(
             <div>
                 <ul>
-                    {this.state.newPost ? {posts}: null}
+                    {posts}
                 </ul>
-                <Post items={this.state.posts}  newPost={this.state.newPost} type='button'/>
+                <Post items={this.state.posts}  type='button'/>
             </div>
         );
     }
