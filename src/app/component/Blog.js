@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import Post from './Post';
+import {Post, AddPost} from './Post';
 
 export default class Blog extends Component{
     constructor(props){
@@ -8,26 +8,27 @@ export default class Blog extends Component{
         this.state = {
             posts: this.props.items
         };
+        this.handleAddPost = this.handleAddPost.bind(this);
+    }
+
+    handleAddPost(posts) {
+        this.setState({posts: posts});
     }
 
     shouldComponentUpdate(nextProps, nextState, nextContext) {
-        console.log('update');
         return true;
     }
-
-
-
     render() {
         const posts = this.state.posts.map((post, index) =>{
-            return <Post item={post} key={index} type='post'/>
+            return <Post item={post} key={index}/>
         });
 
         return(
-            <div>
-                <ul>
+            <div className="App">
+                <ul className="Posts">
                     {posts}
                 </ul>
-                <Post items={this.state.posts}  type='button'/>
+                <AddPost items={this.state.posts} count={this.state.count} onAddPost={this.handleAddPost}/>
             </div>
         );
     }
