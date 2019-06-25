@@ -13,8 +13,16 @@ module.exports ={
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: "babel-loader"
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader','css-loader']
             }
         ]
+    },
+    devServer: {
+        contentBase: path.resolve(__dirname, 'dist'),
+        historyApiFallback: true
     }
 };
 
