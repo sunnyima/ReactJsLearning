@@ -1,24 +1,36 @@
-import React, {Component} from 'react';
-import axios from 'axios';
+import React, { Component } from 'react';
+import  { getUser } from '../actions/userActions';
+import store from '../stores/userStore';
 import UserProfile from '../components/User';
+
 export default class User extends Component {
-    constructor(props){
+
+    constructor(props) {
         super(props);
-        this.state ={
-            user : null
-        }
+        this.state = {
+            user: null
+        };
+        this.onUserChange = this.onUserChange.bind(this);
     }
+
+    onUserChange() {
+        this.setState({ user: store.user });
+    }
+
+    componentDidMount() {
+        getUser(this.props.params.userId);
+        store.on('change', this.onUserChange);
+    }
+
+    componentWillUnmount() {
+        store.removeListener('change', this.onUserChange);
+    }
+
     render() {
         return (
             <div>
                 {this.state.user && <UserProfile {...this.state.user} />}
             </div>
-        );
-    }
-    componentDidMount() {
-        axios.get(`https://jsonplaceholder.typicode.com/users/${this.props.params.userId}`)
-            .then(response =>{
-                this.setState({user: response.data})
-            })
+        )
     }
 }

@@ -4,11 +4,6 @@ import {addPost, getPosts} from "../actions/postActions";
 import store from '../stores/postStore';
 
 export default class Post extends Component {
-
-    componentDidMount() {
-        getPosts();
-    }
-
     render() {
         return (
             <div className="card border-secondary mb-3">

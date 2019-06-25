@@ -7,8 +7,8 @@ export default class Menu extends Component {
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container">
                     <Link to="/" className= "navbar-brand">{this.props.brand}</Link>
-                    <div className="collapse navbar-collapse">
-                        <ul className="navbar-nav">
+                    <div className="navbar-collapse">
+                        <ul className="nav">
                             {this.props.children}
                         </ul>
                     </div>
