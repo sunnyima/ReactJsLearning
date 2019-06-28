@@ -1,18 +1,25 @@
 import React, {Component} from 'react';
-import PostInfo from '../components/Post';
-
-import { connect } from 'react-redux';
+import PostItem from '../components/PostItem';
+import {fetchTweet} from '../actions/tweetActions';
+import {connect} from "react-redux";
 
 class Post extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    componentWillMount() {
+        this.props.dispatch(fetchTweet(this.props.params.postId));
+    }
+
     render() {
         return (
             <div>
-                {this.state.tweet && <PostInfo {...this.state.tweet} />}
+                {this.props.tweet && <PostItem {...this.props.tweet} />}
             </div>
         );
     }
 }
-
 function mapStateToProps(state) {
     return{
         user: state.user.user,
@@ -23,3 +30,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(Post);
+

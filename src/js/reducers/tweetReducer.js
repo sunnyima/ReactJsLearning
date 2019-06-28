@@ -1,6 +1,6 @@
 export  default function reducer(state={
     tweet:{
-        userId : null,
+        userId:null,
         id: null,
         title: null,
         body: null

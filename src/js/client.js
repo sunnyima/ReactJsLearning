@@ -6,8 +6,6 @@ import store from './store';
 
 import Layout from './components/Layout';
 import MainPage from './pages/Main';
-import Users from './pages/Users';
-import User from './pages/User';
 import PageNotFound from './pages/PageNotFound';
 import Posts from "./pages/Posts";
 import Post from "./pages/Post";
@@ -19,9 +17,6 @@ ReactDOM.render(
         <Router history={browserHistory}>
             <Route path="/" component={Layout}>
                 <IndexRoute component={MainPage}/>
-                <Route path="users" component={Users}>
-                    <Route path=":userId" component={User}/>
-                </Route>
                 <Route path="posts" component={Posts}>
                     <Route path=":postId" component={Post}/>
                 </Route>

@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
 import PostsList from '../components/PostsList';
-import { connect } from 'react-redux';
+import {fetchTweets} from '../actions/tweetsActions';
+import {connect} from "react-redux";
+
 
 class Posts extends Component {
+    constructor(props) {
+        super(props);
+    }
+    componentWillMount() {
+        this.props.dispatch(fetchTweets());
+    }
+
+
     render() {
         return (
             <div>
-                {/*<button className="btn btn-primary" onClick={this.newPost}>Добавить пост</button>*/}
                 {
                     (!this.props.children) ?
-                        (<PostsList  posts={this.state.tweets.tweets}/>)
+                        (<PostsList  posts={this.props.tweets}/>)
                         :
                         (this.props.children)
                 }
@@ -17,8 +26,8 @@ class Posts extends Component {
         )
     }
 }
+
 function mapStateToProps(state) {
-    console.log(state);
     return{
         user: state.user.user,
         users: state.users.users,
@@ -28,3 +37,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(Posts);
+

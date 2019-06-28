@@ -3,17 +3,13 @@ import  axios from "axios";
 export function fetchTweets() {
     return function (dispatch) {
         dispatch({type:"FETCH_TWEETS"});
-        axios.get("http://rest.learncode.academy/api/reacttest/tweets")
-            .then((response)=>{
-                dispatch({
-                    type: "FETCH_TWEETS_FULFILLED", payload:[
-                        {id:1, text: 'Lorem ipsum dolor sit amet.'},
-                        {id:2, text: 'Lorem ipsum dolor sit amet, consectetur.'}
-                    ]
+        axios.get("https://jsonplaceholder.typicode.com/posts")
+            .then((response) => {
+                dispatch({type: "FETCH_TWEETS_FULFILLED", payload: response.data
                 })
             })
-            .catch((err)=>{
-                dispatch({type:"FETCH_TWEETS_REJECTED", payload: err})
+            .catch((err) => {
+                dispatch({type: "FETCH_TWEETS_REJECTED", payload: err})
             })
     }
 }

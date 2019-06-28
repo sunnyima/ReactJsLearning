@@ -1,12 +1,11 @@
+import  axios from "axios";
 export  function fetchTweet(id) {
     return function (dispatch) {
         dispatch({type:"FETCH_TWEET"});
         axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`)
             .then((response)=>{
                 dispatch({
-                    type: "FETCH_TWEET_FULFILLED", payload:[
-                        {tweet: response.data}
-                    ]
+                    type: "FETCH_TWEET_FULFILLED", payload: response.data
                 })
             })
             .catch((err)=>{

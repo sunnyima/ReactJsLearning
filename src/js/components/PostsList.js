@@ -1,26 +1,19 @@
 import React, { Component } from 'react';
-import PostItem from './Post';
-import {fetchTweets} from '../actions/tweetsActions';
+import PostItem from './PostItem';
 
 export default class PostsList extends Component {
-    fetchTweets(){
-        this.props.dispatch(fetchTweets());
-    }
     render() {
-        const {user, tweets} = this.props;
-
-        if(!tweets.length){
-            return <button onClick={this.fetchTweets.bind(this)}>Загрузить твиты</button>
-        }
-        const mappedTweets = tweets.map(tweet => <PostItem key={tweet.id} {...tweet}/>);
+        const posts = this.props.posts.map(post=> <PostItem key={post.id} {...post} />);
         return (
             <div>
                 <h1>Посты</h1>
                 <div>
-                    {mappedTweets}
+                    {posts}
                 </div>
             </div>
         )
     }
 }
+
+
 
