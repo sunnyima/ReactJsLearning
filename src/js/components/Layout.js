@@ -1,35 +1,40 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import Menu from  '../components/Menu';
+import MenuItem from  '../components/MenuItem';
 
-import {fetchUser} from '../actions/userActions';
-import {fetchTweets} from '../actions/tweetsActions';
 
-class Layout extends React.Component{
-    fetchTweets(){
-        this.props.dispatch(fetchTweets());
+export default class Layout extends React.Component{
+    constructor(props){
+        super(props);
+        this.brand = 'React blog!';
+    }
+
+    isActive(href){
+        return window.location.pathname === href;
     }
     render() {
-        const {user, tweets} = this.props;
-
-        if(!tweets.length){
-            return <button onClick={this.fetchTweets.bind(this)}>Загрузить твиты</button>
-        }
-        const mappedTweets = tweets.map(tweet => <li key={tweet.id}>{tweet.text}</li>)
         return <div>
-                <h1>{user.name}</h1>
-                <ul>{mappedTweets}</ul>
+            <Menu brand={this.brand}>
+                <MenuItem href="/" active={this.isActive("/")}>
+                    Главная
+                </MenuItem>
+                <MenuItem href="/users" active={this.isActive( "/users")}>
+                    Пользователи
+                </MenuItem>
+                <MenuItem href="/posts" active={this.isActive( "/posts")}>
+                    Посты
+                </MenuItem>
+            </Menu>
+            <div className="container">
+                <div className="row">
+                    <div className="col-12">
+                        {this.props.children}
+                    </div>
                 </div>
-    }
-    componentDidMount() {
-        this.props.dispatch(fetchUser());
-    }
-}
-
-function mapStateToProps(state) {
-    return{
-        user: state.user.user,
-        tweets: state.tweets.tweets
+            </div>
+            <footer className="card-footer">
+                &copy; 2019
+            </footer>
+        </div>
     }
 }
-
-export default connect(mapStateToProps)(Layout);
